@@ -1,0 +1,46 @@
+# ~/.GH/Qompass/Go/Azimuth/discord/compose.yaml
+# ---------------------------------------------
+# Copyright (C) 2025 Qompass AI, All rights reserved
+
+services:
+  nats:
+    image: nats:2.10-alpine
+    command:
+      - "-js"
+    user: "65532:65532"          # non‑root
+    networks: [quantum-net]
+    volumes: ["nats_data:/data"]
+
+  postgres:
+    image: postgres:16-alpine
+    user: "70:70"
+    env_file: .env.postgres
+    volumes: ["pg_data:/var/lib/postgresql/data"]
+    networks: [quantum-net]
+
+  rose:
+    build: ../rose        # your custom Ollama fork
+    runtime: nvidia
+    env_file: .env.rose
+    volumes:
+      - models:/opt/rose/models
+    networks: [quantum-net]
+
+  bot:
+    build: .
+    context: .
+    dockerfile: deploy/Dockerfile.bot
+    env_file: .env.bot
+    depends_on: [nats, rose, postgres]
+    networks: [quantum-net]
+    security_opt: [no-new-privileges:true]
+    user: "1000:1000"     # your UID
+
+volumes:
+  nats_data: {}
+  pg_data: {}
+  models: {}
+networks:
+  quantum-net:
+    external: true
+

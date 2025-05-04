@@ -1,0 +1,14 @@
+# ~/.GH/Qompass/Go/Azimuth/discord/deploy/Dockerfile.bot
+# ------------------------------------------------------
+# Copyright (C) 2025 Qompass AI, All rights reserved
+
+FROM --platform=linux/amd64 golang:1.22-alpine AS builder
+WORKDIR /src
+COPY . .
+RUN apk add --no-cache bash git && \
+    go build -trimpath -buildvcs=false -o /out/bot ./cmd/bot
+
+FROM gcr.io/distroless/static:nonroot
+COPY --from=builder /out/bot /bot
+USER nonroot
+ENTRYPOINT ["/bot"]
