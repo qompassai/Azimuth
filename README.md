@@ -1,95 +1,55 @@
-# <reponame>
+<!-- /qompassai/azimuth/README.md -->
+<!-- ---------------------------- -->
+<!-- Copyright (C) 2025 Qompass AI, All rights reserved -->
 
-## <description> 
+<h2> Qompass AI Azimuth: Your AI navigator </h2>
 
-<p align="center">
-  <a href="https://www.gnu.org/licenses/agpl-3.0">
-    <img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3">
-  <a href="./LICENSE-QCDA">
-    <img src="https://img.shields.io/badge/license-Q--CDA-lightgrey.svg" alt="License: Q-CDA">
-  </a>
+<h3> Qompass AI Azimuth </h3>
+
+![Repository Views](https://komarev.com/ghpvc/?username=qompassai-azimuth)
+![GitHub all releases](https://img.shields.io/github/downloads/qompassai/azimuth/total?style=flat-square)
+
+ <a href="https://go.dev/">
+  <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go">
+</a>
+<br>
+<a href="https://go.dev/doc/">
+  <img src="https://img.shields.io/badge/Go_Documentation-blue?style=flat-square" alt="Go Documentation">
+</a>
+<a href="https://github.com/topics/go-tutorial">
+  <img src="https://img.shields.io/badge/Go_Tutorials-green?style=flat-square" alt="Go Tutorials">
+</a>
+<br>
+  <a href="https://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
+  <a href="./LICENSE-QCDA"><img src="https://img.shields.io/badge/license-Q--CDA-lightgrey.svg" alt="License: Q-CDA"></a>
 </p>
-<!-- zenodo-metadata
-{
-  "title": "qtemplate",
-  "description": "A software project at the intersection of AI, Quantum, and Healthcare.",
-  "license": ["AGPL-3.0", "Q-CDA-1.0"],
-  "language": "eng",
-  "upload_type": "software",
-  "access_right": "open",
-  "creators": [
-    {
-      "name": "Porter, Matthew A.",
-      "affiliation": "Qompass AI",
-      "orcid": "https://orcid.org/0000-0002-0302-4812"
-    }
-  ],
-  "keywords": [
-    "AI",
-    "Quantum",
-    "Post-Quantum Cryptography",
-    "Healthcare",
-    "Medical Education",
-    "Post-Quantum AI"
-  ],
-  "communities": [
-    {"identifier": "qompassai"}
-  ],
-  "contributors": [
-    {
-      "name": "Qompass AI",
-      "type": "Sponsor"
-    }
-  ]
+
+<h3> Get Started with Nix </h3>
+
+### In your nix config
+
+```nix
+{ config, ... }: {
+imports = [ inputs.ghost.nixosModules.ghost ];
+ghost.enable = true;
+ghost.domain = "qompass.ai";
 }
--->
-
+```
 ---
-
-## 📄 Cite this Repository
-
-If you use this project, please cite it as:
-
-> Matthew A. Porter (2025). **<reponame>**. Zenodo. [https://doi.org/10.5281/zenodo.XXXXX](https://doi.org/10.5281/zenodo.XXXXX)
-
-Or in BibTeX format:
-
-```bibtex
-@software{porter_<reponame>_2025,
-  author       = {Matthew A. Porter},
-  title        = {<reponame>},
-  year         = {2025},
-  publisher    = {Zenodo},
-  version      = {v${RELEASE_DATE}},
-  doi          = {10.5281/zenodo.XXXXX},
-  url          = {https://doi.org/10.5281/zenodo.XXXXX}
-}
-
-
-### 📄 <reponame>
-
-- [Qompass Diver](https://github.com/qompassai/Diver)
-- [Qompass rose.nvim](https://github.com/qompassai/rose.nvim)
-- [Qompass blaze.nvim](https://github.com/qompassai/blaze.nvim)
-- [Qompass blaze-ts.nvim](https://github.com/qompassai/blaze-ts.nvim)
-
+```sh
+nix build .#ghost-mailserver
+```
 ---
+```sh
+sudo nixos-rebuild switch --flake .#your-hostname
+```
 
 <details id="Contact">
   <summary><strong>Contact Qompass AI</strong></summary>
 
  <div align="center">
-  <p>Matthew A. Porter<sup>1</sup><br>
-  <sup>1</sup>Qompass AI, Spokane, WA</p>
-
-  <a href="mailto:&#109;&#97;&#112;&#64;&#113;&#111;&#109;&#112;&#97;&#115;&#115;&#46;&#97;&#105;">
-  <img src="https://img.shields.io/badge/Email-Get_a_Quote-blue?style=flat-square&logo=gmail" alt="Email Me">
-</a>
-
-  <a href="sms:&#43;&#49;&#53;&#48;&#57;&#57;&#49;&#57;&#53;&#50;&#51;&#55;">
-  <img src="https://img.shields.io/badge/SMS-Text_Me-blue?style=flat-square&logo=minutemailer" alt="Text Me">
-</a>
-
+  <p>Matthew A. Porter<br>
+  Qompass AI, Spokane, WA</p>
   
   <h3>Publications</h3>
   <p>
@@ -103,21 +63,22 @@ Or in BibTeX format:
       <img src="https://img.shields.io/badge/Zenodo-Publications-blue?style=flat-square&logo=zenodo" alt="Zenodo">
     </a>
   </p>
+
+  <h3 align="center">Developer Programs</h3>
+<div align="center">
+ 
+[![NVIDIA Developer](https://img.shields.io/badge/NVIDIA-Developer_Program-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://developer.nvidia.com/)
+[![Meta Developer](https://img.shields.io/badge/Meta-Developer_Program-0668E1?style=for-the-badge&logo=meta&logoColor=white)](https://developers.facebook.com/)
+[![HackerOne](https://img.shields.io/badge/-HackerOne-%23494649?style=for-the-badge&logo=hackerone&logoColor=white)](https://hackerone.com/phaedrusflow)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-qompass-yellow?style=flat-square&logo=huggingface)](https://huggingface.co/qompass)
+[![Epic Games Developer](https://img.shields.io/badge/Epic_Games-Developer_Program-313131?style=for-the-badge&logo=epic-games&logoColor=white)](https://dev.epicgames.com/)
+</div>
+</details>
   
   <h3>Professional Profiles</h3>
   <p>
     <a href="https://www.linkedin.com/in/matt-a-porter-103535224/">
       <img src="https://img.shields.io/badge/LinkedIn-Matt--Porter-blue?style=flat-square&logo=linkedin" alt="Personal LinkedIn">
-    </a>
-    <a href="https://www.linkedin.com/company/95058568/">
-      <img src="https://img.shields.io/badge/LinkedIn-Qompass--AI-blue?style=flat-square&logo=linkedin" alt="Startup LinkedIn">
-    </a>
-  </p>
-  
-  <h3>Social Media</h3>
-  <p>
-    <a href="https://twitter.com/PhaedrusFlow">
-      <img src="https://img.shields.io/badge/Twitter-@PhaedrusFlow-blue?style=flat-square&logo=twitter" alt="X/Twitter">
     </a>
     <a href="https://www.instagram.com/phaedrusflow">
       <img src="https://img.shields.io/badge/Instagram-phaedrusflow-purple?style=flat-square&logo=instagram" alt="Instagram">
@@ -163,25 +124,14 @@ Or in BibTeX format:
 <p><i>Funding helps us continue our research at the intersection of AI, healthcare, and education</i></p>
 </div>
 
-<h3 align="center">Developer Programs</h3>
-<div align="center">
- 
-[![NVIDIA Developer](https://img.shields.io/badge/NVIDIA-Developer_Program-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://developer.nvidia.com/)
-[![Meta Developer](https://img.shields.io/badge/Meta-Developer_Program-0668E1?style=for-the-badge&logo=meta&logoColor=white)](https://developers.facebook.com/)
-[![HackerOne](https://img.shields.io/badge/-HackerOne-%23494649?style=for-the-badge&logo=hackerone&logoColor=white)](https://hackerone.com/phaedrusflow)
-[![HuggingFace](https://img.shields.io/badge/HuggingFace-qompass-yellow?style=flat-square&logo=huggingface)](https://huggingface.co/qompass)
-[![Epic Games Developer](https://img.shields.io/badge/Epic_Games-Developer_Program-313131?style=for-the-badge&logo=epic-games&logoColor=white)](https://dev.epicgames.com/)
-</div>
-</details>
 
-<details id="FAQ">
-  <summary><strong>Frequently Asked Questions</strong></summary>
+
+<details id="FAQ">rong></summary>
 
 ### Q: How do you mitigate against bias?
 
 **TLDR - we do math to make AI ethically useful**
-
-### A: We delineate between mathematical bias (MB) - a fundamental parameter in neural network equations - and algorithmic/social bias (ASB). While MB is optimized during model training through backpropagation, ASB requires careful consideration of data sources, model architecture, and deployment strategies. We implement attention mechanisms for improved input processing and use legal open-source data and secure web-search APIs to help mitigate ASB. 
+nisms for improved input processing and use legal open-source data and secure web-search APIs to help mitigate ASB. 
 
  [AAMC AI Guidelines | One way to align AI against ASB](https://www.aamc.org/about-us/mission-areas/medical-education/principles-ai-use)
 
@@ -250,23 +200,6 @@ Where:
 
 </details>
 
-<details id="Zenodo DOI">
-  <summary><strong>Digital Object Identifier (DOI) for public transparency and accountability</strong></summary>
-Badge
-
-
-```markdown
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxx.svg)](https://doi.org/10.5281/zenodo.xxxxxx)
-```
-
----
-
-- See `.zenodo.json` for metadata, authorship, licensing, and related software attribution.
-</details>
-
-## 🧭 Attribution
-
-
 
 <details id="Dual-License Notice">
   <summary><strong>What a Dual-License Means</strong></summary>
@@ -299,7 +232,7 @@ Recent attacks underscore the importance of robust cybersecurity measures:
 - The White House and Congress jointly designated October 2024 as Cybersecurity Awareness Month. This designation comes with over 100 actions that align the Federal government and public/private sector partners are taking to help every man, woman, and child to safely navigate the age of AI.
 
 By offering both open source and commercial licensing options, we strive to create a balance that promotes innovation and accessibility. We address the complex cybersecurity challenges faced by vulnerable populations and critical infrastructure sectors as the foundation of our solutions, not an afterthought..
-
+<div id="footnotes">
 [^1]: [International Counter Ransomware Initiative 2024 Joint Statement](https://www.whitehouse.gov/briefing-room/statements-releases/2024/10/02/international-counter-ransomware-initiative-2024-joint-statement/)
 
 [^2]: [Contec CMS8000 Contains a Backdoor](https://www.cisa.gov/sites/default/files/2025-01/fact-sheet-contec-cms8000-contains-a-backdoor-508c.pdf)
@@ -315,13 +248,6 @@ By offering both open source and commercial licensing options, we strive to crea
 [^7]: [A Proclamation on Cybersecurity Awareness Month, 2024 ](https://www.whitehouse.gov/briefing-room/presidential-actions/2024/09/30/a-proclamation-on-cybersecurity-awareness-month-2024/)
 
 [^8]: [Minneapolis school district says data breach affected more than 100,000 people](https://therecord.media/minneapolis-schools-say-data-breach-affected-100000/)
+</div>
 </details>
-
-
-
-![Repository Views](https://komarev.com/ghpvc/?username=REPO_PLACEHOLDER)
-
-<p align="center">
-  <i>Last Updated: <timestamp></i>
-</p>
 
