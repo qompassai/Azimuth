@@ -5,58 +5,64 @@
 package main
 
 import (
-    "context"
-    "encoding/json"
-    "os"
-    "os/signal"
-    "syscall"
+	"encoding/json"
+	"os"
+	"os/signal"
+	"syscall"
 
-    "github.com/bwmarrin/discordgo"
-    "github.com/qompassai/azimuth/internal/bus"
-    "github.com/qompassai/azimuth/internal/config"
-    "github.com/qompassai/azimuth/internal/model"
-    "github.com/rs/zerolog/log"
+	"github.com/bwmarrin/discordgo"
+	"github.com/qompassai/azimuth/internal/bus"
+	"github.com/qompassai/azimuth/internal/config"
+	"github.com/qompassai/azimuth/internal/model"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {
-    cfg := config.MustLoad()
+	cfg := config.MustLoad()
 
-    dg, err := discordgo.New("Bot " + cfg.DiscordToken)
-    if err != nil {
-        log.Fatal().Err(err).Msg("create discord session")
-    }
-    dg.Identify.Intents = discordgo.IntentGuildMessages
+	dg, err := discordgo.New("Bot " + cfg.DiscordToken)
+	if err != nil {
+		log.Fatal().Err(err).Msg("create discord session")
+	}
+	dg.Identify.Intents = discordgo.IntentGuildMessages
 
-    // Connect to NATS JetStream
-    js := bus.MustJetStream(cfg)
+	// Connect to NATS JetStream
+	js := bus.MustJetStream(cfg)
 
-    // Discord → NATS
-    dg.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
-        if m.Author.Bot {
-            return
-        }
-        msg := model.NewDiscordMessage(m)
-        if data, err := json.Marshal(msg); err == nil {
-            js.PublishAsync("msg.in.discord", data)
-        }
-    })
+	// Discord → NATS
+	dg.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
+		if m.Author == nil || m.Author.Bot {
+			return
+		}
+		msg := model.NewDiscordMessage(m)
+		if data, err := json.Marshal(msg); err == nil {
+			if _, err := js.PublishAsync("msg.in.discord", data); err != nil {
+				log.Error().Err(err).Msg("publish inbound message")
+			}
+		}
+	})
 
-    // NATS → Discord
-    bus.MustSubscribe(js, "msg.out.discord", func(data []byte) {
-        var r model.Response
-        if err := json.Unmarshal(data, &r); err == nil {
-            dg.ChannelMessageSend(r.ChannelID, r.Content)
-        }
-    })
+	// NATS → Discord
+	bus.MustSubscribe(js, "msg.out.discord", func(data []byte) {
+		var r model.Response
+		if err := json.Unmarshal(data, &r); err == nil {
+			if _, err := dg.ChannelMessageSend(r.ChannelID, r.Content); err != nil {
+				log.Error().Err(err).Msg("send discord message")
+			}
+		}
+	})
 
-    if err = dg.Open(); err != nil {
-        log.Fatal().Err(err).Msg("discord open")
-    }
-    defer dg.Close()
+	if err = dg.Open(); err != nil {
+		log.Fatal().Err(err).Msg("discord open")
+	}
+	defer func() {
+		if err := dg.Close(); err != nil {
+			log.Error().Err(err).Msg("discord close")
+		}
+	}()
 
-    // graceful shutdown
-    sig := make(chan os.Signal, 1)
-    signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
-    <-sig
-    dg.Close()
+	// graceful shutdown
+	sig := make(chan os.Signal, 1)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
+	<-sig
 }

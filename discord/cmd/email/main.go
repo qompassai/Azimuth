@@ -6,6 +6,5 @@ package main
 
 // TODO: Implement IMAP/SMTP polling and NATS publishing
 func main() {
-    // skeleton placeholder
+	// skeleton placeholder
 }
-
